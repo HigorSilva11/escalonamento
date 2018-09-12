@@ -7,7 +7,7 @@ public class Round_Robin {
 	public static void main(String[] args ){
 		Scanner var = new Scanner(System.in);
 		
-		int quantum, N , entrada , tempoAtual, execucao, q , temposFinais[], quantidadedeProcessos,burstNovo, tempoExecucao[];
+		int quantum, N1 , entrada , tempoAtual, execucao, q , temposFinais[], quantidadedeProcessos,burstNovo, tempoExecucao[];
 		ArrayList chegada, burst, processos , cpchegada, cpburst;
 		String ordem;
 		double tempoMedioExecucao, tempoMedioEspera , turnaround;
@@ -32,7 +32,7 @@ public class Round_Robin {
 			tempoExecucao = new int[N];
 			
 			
-			for (int i=0; i<N ; i++)	{
+			for (int i=0; i<N1 ; i++)	{
 				System.out.println("Qual o tempo de chegada do P"+(i+1));
 				entrada = var.nextInt();
 				chegada.add(entrada);
@@ -49,7 +49,7 @@ public class Round_Robin {
 			processos = new ArrayList();
 			
 			while (quantidadedeProcessos > 0){
-				for(int i =0; i<N ; i++){
+				for(int i =0; i<N1 ; i++){
 					if((int) chegada.get(i) != -1 && (int) chegada.get(i) <=tempoAtual){
 						processos.add(i);
 						chegada.set(i, -1);
@@ -75,7 +75,7 @@ public class Round_Robin {
 					}
 					
 					if ((int) burst.get(execucao)> 0){
-						for (int i = 0 ; i < N ; i ++){
+						for (int i = 0 ; i < N1 ; i ++){
 							if ((int) chegada.get(i) != -1  && (int) chegada.get(i) <= tempoAtual){
 							processos.add(i);
 							chegada.set(i, -1);
@@ -94,17 +94,17 @@ public class Round_Robin {
 		}
 			tempoMedioExecucao = 0;
 			tempoMedioEspera = 0;
-			for ( int i=0 ; i<N; i++){
+			for ( int i=0 ; i<N1; i++){
 				tempoExecucao[i] = temposFinais[i]- (int) cpchegada.get(i);
 				tempoMedioExecucao +=tempoExecucao[i];
 				tempoMedioEspera += tempoExecucao[i] - (int) cpburst.get(i);
 			}
 			
-			tempoMedioExecucao = tempoMedioExecucao /N;
-			tempoMedioEspera = tempoMedioEspera/N;
+			tempoMedioExecucao = tempoMedioExecucao /N1;
+			tempoMedioEspera = tempoMedioEspera/N1;
 			System.out.println("PROCESSAMENTO - PART" +contTeste);
 			
-			for (int i  = 0; i<N ; i++){
+			for (int i  = 0; i<N1 ; i++){
 				turnaround = (int)temposFinais[i] - (int) cpchegada.get(i);
 				formato = decimal.format(turnaround);
 				saida = "|turnaround|	P" +i + ": "+ formato + "ms";
